@@ -56,3 +56,62 @@ const transformer = function (str, fn) {
 };
 
 transformer('JavaScript is the best!', upperFirstWord);
+
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet('Hey');
+greeterHey('Ruslan');
+// it oworks because of closure mechanism in JS
+greet('Hi')('Diana');
+
+// the same implementation using the arrow functions
+const greetArrow = greeting => {
+  return name => {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+greetArrow('Good evening')('Ruslan');
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} fligt ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode} ${flightNum}`,
+      name,
+    });
+  },
+};
+
+lufthansa.book(239, 'Ruslan Zinovyev');
+lufthansa.book(635, 'Jonas Smith');
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// Does not work sine this is undefined
+// book(23, 'Sarah Williams');
+
+// method call() specify THIS as a first argument, and we can call this method on function because function is an Object in JS
+book.call(eurowings, 23, 'Sarah Williams');
+book.call(lufthansa, 239, 'Maty Cooper');
+
+// apply method actually do the same, but it gets THIS as first argument and array as second one (array of arguments) It's not used anymore in modern JS
+const flightData = [83, 'George Cooper'];
+book.apply(lufthansa, flightData);
+book.call(lufthansa, ...flightData);
