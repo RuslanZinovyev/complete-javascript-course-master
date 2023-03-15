@@ -198,12 +198,11 @@ const poll = {
     }
     this.displayResults();
   },
-  displayResults(type = []) {
-    if (typeof type === 'object') {
+  displayResults(type = 'array') {
+    if (typeof type === 'array') {
       console.log(this.answers);
     } else if (typeof type === 'string') {
-      const [a, b, c, d] = this.answers;
-      console.log(`Poll results are ${a}, ${b}, ${c}, ${d}`);
+      console.log(`Poll results are ${this.answers.join(', ')}`);
     }
   },
 };
@@ -211,3 +210,6 @@ const poll = {
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// bonus section
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
