@@ -115,3 +115,34 @@ book.call(lufthansa, 239, 'Maty Cooper');
 const flightData = [83, 'George Cooper'];
 book.apply(lufthansa, flightData);
 book.call(lufthansa, ...flightData);
+
+// Bind method returns function that bind argument as THIS keyword
+const bookEW = book.bind(eurowings);
+bookEW(23, 'Steven Williams');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+console.log(addVAT(100));
+
+const addTaxArrow = rate => value => {
+  return value + value * rate;
+};
+
+console.log(addTaxArrow(0.1)(200));
+const addVat = addTaxArrow(0.23);
+console.log(addVat(100));
