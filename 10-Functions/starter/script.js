@@ -213,3 +213,10 @@ document
 
 // bonus section
 poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
+// run once function IIFE (Imidiately Invoked Function Expression)
+(function () {
+  console.log('This will never run again');
+})();
+
+(() => console.log('This will ALSO never run again'))();
