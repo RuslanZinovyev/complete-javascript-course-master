@@ -38,7 +38,7 @@ const accounts = [account1, account2, account3, account4];
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.balance__value');
+const labelBalance = document.querySelector('.pwd');
 const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
@@ -65,13 +65,13 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 let arr = ['a', 'b', 'c', 'd', 'e'];
@@ -102,3 +102,37 @@ console.log(...arr, ...arr2);
 
 // JOIN
 console.log(letters.join(' - '));
+
+// AT (this method works either arrays or strings)
+const array = [23, 11, 46];
+console.log(array.at(0));
+console.log(array.at(1));
+console.log(array.at(-1)); // get the last index
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(`Your withdrew ${Math.abs(movement)}`);
+//   }
+// }
+
+movements.forEach((movement, index) => {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: Your withdrew ${Math.abs(movement)}`);
+  }
+});
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((value, key) => {
+  console.log(`key: ${key} value: ${value}`);
+});
