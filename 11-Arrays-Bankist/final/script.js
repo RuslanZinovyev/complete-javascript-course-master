@@ -359,6 +359,23 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
+const checkDogs = function (dogsJulia, dogsKate) {
+  const updatedDogs = dogsJulia.slice();
+  updatedDogs.splice(0, 1);
+  updatedDogs.splice(-2);
+  const mergedArray = [...updatedDogs, ...dogsKate];
+  mergedArray.forEach((dog, number) => {
+    dog < 3
+      ? console.log(`Dog number ${number + 1} is still a puppy`)
+      : console.log(
+          `Dog number ${number + 1} is an adult, and is ${dog} years old`
+        );
+  });
+  console.log(mergedArray);
+};
+
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+
 /*
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCorrected = dogsJulia.slice();
