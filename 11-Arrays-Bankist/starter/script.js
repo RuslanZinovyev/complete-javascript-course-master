@@ -61,6 +61,40 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+
+  movements.forEach((mov, i) => {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+    <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${mov}</div>
+  </div>`;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+
+const user = 'Steven Thomas Whilliams'; // stw
+
+const createUsernames = accs => {
+  accs.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -71,45 +105,45 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
-let arr = ['a', 'b', 'c', 'd', 'e'];
-
-console.log(arr.slice(2));
-console.log(arr.slice(2, 4));
-console.log(arr.slice(-2));
-console.log(arr.slice(-1));
-
-// SLICE if you want to make the shallow copy of the array
-console.log(arr.slice());
-console.log([...arr]);
-
-// SPLICE (mutates the original array)
-console.log(arr.splice(2));
-console.log(`Original array arr is ${arr}`);
-
-// REVERSE (mutates the original array)
-arr = ['a', 'b', 'c', 'd', 'e'];
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-console.log(arr2.reverse());
-console.log(arr2);
-
-// CONCAT
-const letters = arr.concat(arr2);
-console.log(letters);
-console.log(...arr, ...arr2);
-
-// JOIN
-console.log(letters.join(' - '));
-
-// AT (this method works either arrays or strings)
-const array = [23, 11, 46];
-console.log(array.at(0));
-console.log(array.at(1));
-console.log(array.at(-1)); // get the last index
-
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// /////////////////////////////////////////////////
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// console.log(arr.slice(2));
+// console.log(arr.slice(2, 4));
+// console.log(arr.slice(-2));
+// console.log(arr.slice(-1));
+
+// // SLICE if you want to make the shallow copy of the array
+// console.log(arr.slice());
+// console.log([...arr]);
+
+// // SPLICE (mutates the original array)
+// console.log(arr.splice(2));
+// console.log(`Original array arr is ${arr}`);
+
+// // REVERSE (mutates the original array)
+// arr = ['a', 'b', 'c', 'd', 'e'];
+// const arr2 = ['j', 'i', 'h', 'g', 'f'];
+// console.log(arr2.reverse());
+// console.log(arr2);
+
+// // CONCAT
+// const letters = arr.concat(arr2);
+// console.log(letters);
+// console.log(...arr, ...arr2);
+
+// // JOIN
+// console.log(letters.join(' - '));
+
+// // AT (this method works either arrays or strings)
+// const array = [23, 11, 46];
+// console.log(array.at(0));
+// console.log(array.at(1));
+// console.log(array.at(-1)); // get the last index
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // for (const [i, movement] of movements.entries()) {
 //   if (movement > 0) {
@@ -119,20 +153,25 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   }
 // }
 
-movements.forEach((movement, index) => {
-  if (movement > 0) {
-    console.log(`Movement ${index + 1}: You deposited ${movement}`);
-  } else {
-    console.log(`Movement ${index + 1}: Your withdrew ${Math.abs(movement)}`);
-  }
-});
+// movements.forEach((movement, index) => {
+//   if (movement > 0) {
+//     console.log(`Movement ${index + 1}: You deposited ${movement}`);
+//   } else {
+//     console.log(`Movement ${index + 1}: Your withdrew ${Math.abs(movement)}`);
+//   }
+// });
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-currencies.forEach((value, key) => {
-  console.log(`key: ${key} value: ${value}`);
-});
+// currencies.forEach((value, key) => {
+//   console.log(`key: ${key} value: ${value}`);
+// });
+
+const euroToUsd = 1.1;
+const movementsUsd = movements.map(usd => usd * euroToUsd);
+console.log(movements);
+console.log(movementsUsd);
