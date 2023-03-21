@@ -38,7 +38,7 @@ const accounts = [account1, account2, account3, account4];
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.pwd');
+const labelBalance = document.querySelector('.balance__value');
 const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
@@ -82,6 +82,11 @@ displayMovements(account1.movements);
 
 const user = 'Steven Thomas Whilliams'; // stw
 
+const calcDisplayBalance = movements => {
+  const balance = movements.reduce((result, mov) => result + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
 const createUsernames = accs => {
   accs.forEach(acc => {
     acc.username = acc.owner
@@ -93,7 +98,8 @@ const createUsernames = accs => {
 };
 
 createUsernames(accounts);
-console.log(accounts);
+
+calcDisplayBalance(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -106,6 +112,12 @@ console.log(accounts);
 // ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const max = movements.reduce((acc, current) => {
+  if (acc > current) return acc;
+  else return current;
+});
+console.log(max);
 
 // /////////////////////////////////////////////////
 // let arr = ['a', 'b', 'c', 'd', 'e'];
