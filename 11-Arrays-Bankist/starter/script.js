@@ -211,3 +211,15 @@ const euroToUsd = 1.1;
 const movementsUsd = movements.map(usd => usd * euroToUsd);
 console.log(movements);
 console.log(movementsUsd);
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') {
+    console.log(acc);
+  }
+}
