@@ -78,8 +78,6 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 const user = 'Steven Thomas Whilliams'; // stw
 
 const calcDisplayBalance = movements => {
@@ -87,20 +85,20 @@ const calcDisplayBalance = movements => {
   labelBalance.textContent = `${balance} EUR`;
 };
 
-const calcDisplaySummary = function (movements) {
-  const income = movements
+const calcDisplaySummary = function (acc) {
+  const income = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${income}`;
 
-  const outcome = movements
+  const outcome = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(outcome)}`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((interest, i, arr) => {
       console.log(arr);
       return interest >= 1;
@@ -108,8 +106,6 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, interest) => acc + interest, 0);
   labelSumInterest.textContent = `${interest}`;
 };
-
-calcDisplaySummary(account1.movements);
 
 const createUsernames = accs => {
   accs.forEach(acc => {
@@ -123,103 +119,32 @@ const createUsernames = accs => {
 
 createUsernames(accounts);
 
-calcDisplayBalance(account1.movements);
+let currentAccount;
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
+// Event handler
+btnLogin.addEventListener('click', event => {
+  // Prevent form from submitting
+  event.preventDefault();
+  console.log('LOGIN');
+  currentAccount = accounts.find(
+    account => account.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
 
-// const currencies = new Map([
-//   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
-//   ['GBP', 'Pound sterling'],
-// ]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-const max = movements.reduce((acc, current) => {
-  if (acc > current) return acc;
-  else return current;
-});
-console.log(max);
-
-// /////////////////////////////////////////////////
-// let arr = ['a', 'b', 'c', 'd', 'e'];
-
-// console.log(arr.slice(2));
-// console.log(arr.slice(2, 4));
-// console.log(arr.slice(-2));
-// console.log(arr.slice(-1));
-
-// // SLICE if you want to make the shallow copy of the array
-// console.log(arr.slice());
-// console.log([...arr]);
-
-// // SPLICE (mutates the original array)
-// console.log(arr.splice(2));
-// console.log(`Original array arr is ${arr}`);
-
-// // REVERSE (mutates the original array)
-// arr = ['a', 'b', 'c', 'd', 'e'];
-// const arr2 = ['j', 'i', 'h', 'g', 'f'];
-// console.log(arr2.reverse());
-// console.log(arr2);
-
-// // CONCAT
-// const letters = arr.concat(arr2);
-// console.log(letters);
-// console.log(...arr, ...arr2);
-
-// // JOIN
-// console.log(letters.join(' - '));
-
-// // AT (this method works either arrays or strings)
-// const array = [23, 11, 46];
-// console.log(array.at(0));
-// console.log(array.at(1));
-// console.log(array.at(-1)); // get the last index
-
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-// for (const [i, movement] of movements.entries()) {
-//   if (movement > 0) {
-//     console.log(`You deposited ${movement}`);
-//   } else {
-//     console.log(`Your withdrew ${Math.abs(movement)}`);
-//   }
-// }
-
-// movements.forEach((movement, index) => {
-//   if (movement > 0) {
-//     console.log(`Movement ${index + 1}: You deposited ${movement}`);
-//   } else {
-//     console.log(`Movement ${index + 1}: Your withdrew ${Math.abs(movement)}`);
-//   }
-// });
-
-// const currencies = new Map([
-//   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
-//   ['GBP', 'Pound sterling'],
-// ]);
-
-// currencies.forEach((value, key) => {
-//   console.log(`key: ${key} value: ${value}`);
-// });
-
-const euroToUsd = 1.1;
-const movementsUsd = movements.map(usd => usd * euroToUsd);
-console.log(movements);
-console.log(movementsUsd);
-
-const firstWithdrawal = movements.find(mov => mov < 0);
-console.log(firstWithdrawal);
-
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
-console.log(account);
-
-for (const acc of accounts) {
-  if (acc.owner === 'Jessica Davis') {
-    console.log(acc);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and welcome message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    // Display movements
+    displayMovements(currentAccount.movements);
+    // Display balance
+    calcDisplayBalance(currentAccount.movements);
+    // Display summary
+    calcDisplaySummary(currentAccount);
   }
-}
+});
