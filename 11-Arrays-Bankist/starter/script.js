@@ -100,7 +100,6 @@ const calcDisplaySummary = function (acc) {
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((interest, i, arr) => {
-      console.log(arr);
       return interest >= 1;
     })
     .reduce((acc, interest) => acc + interest, 0);
@@ -134,11 +133,9 @@ let currentAccount;
 btnLogin.addEventListener('click', event => {
   // Prevent form from submitting
   event.preventDefault();
-  console.log('LOGIN');
   currentAccount = accounts.find(
     account => account.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and welcome message
@@ -152,6 +149,37 @@ btnLogin.addEventListener('click', event => {
 
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', event => {
+  event.preventDefault();
+  const amount = inputLoanAmount.value;
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', event => {
+  event.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount?.pin
+  ) {
+    const deleteIndex = accounts.findIndex(
+      account => account.username === currentAccount.username
+    );
+    accounts.splice(deleteIndex, 1);
+    containerApp.style.opacity = 0;
+  }
+
+  inputTransferAmount.value = inputTransferTo.value = '';
 });
 
 btnTransfer.addEventListener('click', event => {
