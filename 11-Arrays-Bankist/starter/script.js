@@ -227,3 +227,43 @@ const descending = (x, y) => {
 
 const sortingAsc = (x, y) => x - y;
 const sortingDsc = (x, y) => y - x;
+
+// Array fill() and array from() methods
+const y = Array.from({ length: 7 }, () => 1);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(pos => pos > 0)
+  .reduce((acc, curr) => acc + curr);
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((counter, current) => {
+    return current >= 1000 ? ++counter : counter;
+  }, 0);
+
+const sums = accounts
+  .flatMap(account => account.movements)
+  .reduce(
+    (sums, current) => {
+      current > 0 ? (sums.deposits += current) : (sums.withdrawals += current);
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+// this is a nice title => This Is a Nice Title
+const convertTitleCase = title => {
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word =>
+      exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join(' ');
+  return titleCase;
+};
+console.log(convertTitleCase('this is a nice title'));
