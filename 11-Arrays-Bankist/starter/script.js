@@ -61,10 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
+  // Provide sorting
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
-  movements.forEach((mov, i) => {
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -203,3 +205,25 @@ btnTransfer.addEventListener('click', event => {
     updateUI(currentAccount);
   }
 });
+
+let sorted = false;
+
+btnSort.addEventListener('click', event => {
+  event.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
+const nums = [3, 5, 2, 64, 23, 1, 90];
+const ascending = (x, y) => {
+  if (x > y) return 1;
+  else if (x < y) return -1;
+};
+
+const descending = (x, y) => {
+  if (x > y) return -1;
+  else if (x < y) return 1;
+};
+
+const sortingAsc = (x, y) => x - y;
+const sortingDsc = (x, y) => y - x;
