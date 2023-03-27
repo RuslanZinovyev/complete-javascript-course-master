@@ -251,3 +251,47 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+console.log(23 === 23.0);
+console.log(0.1 + 0.2);
+/**
+ The reason console.log(0.1 + 0.2 === 0.3) returns false is due to the way floating-point numbers are represented and handled in JavaScript (and many other programming languages). JavaScript uses the IEEE 754 standard for floating-point arithmetic, which represents numbers in binary format.
+
+Some decimal numbers cannot be represented precisely in binary format, which can lead to rounding errors when performing arithmetic operations. In the case of 0.1 and 0.2, their binary representations are recurring binary fractions, meaning that they cannot be represented precisely in a finite amount of binary digits.
+
+When you add 0.1 and 0.2 in JavaScript, the result is not exactly 0.3 but a number very close to it. To see the exact result of 0.1 + 0.2, you can log it to the console:
+ */
+console.log(0.1 + 0.2 === 0.3);
+
+// Conversion
+console.log(Number('23'));
+console.log(+'23');
+
+// Parsing (second argument is redix, the same in Java)
+console.log(Number.parseInt('30px'));
+console.log(Number.parseInt('1010', 2)); // returns 10
+console.log(Math.trunc(34.342433224234)); // completely remove the decimal part
+console.log(Math.ceil(34.234)); // rounding up
+console.log(Math.round(34.499)); // just rounding after 0.5
+console.log(Math.floor(34.234)); // rounding down
+console.log((34.342).toFixed(2)); // prints 34.34
+
+// Create a date
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Aug 02 2020 18:05:31'));
+console.log(new Date('December 24, 2015')); // can be unreliable
+console.log(new Date(account1.movementsDates[0]));
+console.log(new Date(2023, 4, 26, 16, 17, 5));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+console.log(3 * 24 * 60 * 60 * 1000); // timestamp
+console.log(Date.now()); // prints the current timestamp
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+future.setFullYear(2023);
+console.log(future);
