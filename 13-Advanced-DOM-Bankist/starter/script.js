@@ -48,13 +48,45 @@ message.textContent = 'We are using cookies on our web site';
 message.innerHTML =
   'We are using cookies on our web site. <button class="btn btn--close-cookie">Got it!</button>';
 // prepend add message element as a first child to header element
-header.prepend(message);
+// header.prepend(message);
 // append add message element as a last child to header element
-header.append(message);
+// header.append(message);
 // add elements as siblings
 // header.before(message);
 // header.after(message);
-const messageBtn = document.querySelector('.btn--close-cookie');
-messageBtn.addEventListener('click', () => {
-  message.remove(messageBtn);
+// const messageBtn = document.querySelector('.btn--close-cookie');
+// messageBtn.addEventListener('click', () => {
+//   message.remove(messageBtn);
+// });
+
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+// Attributes
+const logo = document.querySelector('.nav__logo');
+logo.setAttribute('company', 'Bankist');
+// absolute url path
+console.log(logo.src);
+const url = logo.getAttribute('src');
+console.log(url);
+// Classes, you can change it to real class name
+// logo.classList.add('c');
+// logo.classList.remove('c', 'f');
+// logo.classList.toggle('c');
+// logo.classList.contains('c');
+
+// Smooth scrolling implementation
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', event => {
+  const s1coords = section1.getBoundingClientRect();
+  // OldSchool way to scroll to particular section
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  // Modern way for the same operation
+  section1.scrollIntoView({ behavior: 'smooth' });
 });
