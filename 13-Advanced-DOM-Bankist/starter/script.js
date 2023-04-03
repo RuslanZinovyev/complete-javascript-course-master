@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (event) {
   event.preventDefault;
@@ -29,6 +31,50 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// Smooth scrolling implementation
+btnScrollTo.addEventListener('click', event => {
+  const s1coords = section1.getBoundingClientRect();
+  // OldSchool way to scroll to particular section
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  // Modern way for the same operation
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Page navigation
+// document.querySelectorAll('.nav__link').forEach(element => {
+//   element.addEventListener('click', function (event) {
+//     event.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth',
+//     });
+//   });
+// });
+
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
+
+document
+  .querySelector('.nav__links')
+  .addEventListener('click', function (event) {
+    // Matching strategy
+    if (event.target.classList.contains('nav__link')) {
+      event.preventDefault();
+      const id = event.target.getAttribute('href');
+      document.querySelector(id).scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  });
+
+////////////////////////////////////////////////
+///////////// Experimental code ///////////////
+///////////////////////////////////////////////
 
 // Selecting elements
 const header = document.querySelector('header');
@@ -75,18 +121,35 @@ console.log(url);
 // logo.classList.toggle('c');
 // logo.classList.contains('c');
 
-// Smooth scrolling implementation
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+// const alertH1 = event => {
+//   alert('addEventListener: Great! You are reding the heading =)');
+//   h1.removeEventListener('mouseenter', alertH1);
+// };
 
-btnScrollTo.addEventListener('click', event => {
-  const s1coords = section1.getBoundingClientRect();
-  // OldSchool way to scroll to particular section
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
-  // Modern way for the same operation
-  section1.scrollIntoView({ behavior: 'smooth' });
-});
+// const h1 = document.querySelector('h1');
+
+// h1.addEventListener('mouseenter', alertH1);
+
+// it's obsolete approach
+// h1.onmouseenter = () => {
+//   alert('it works');
+// };
+
+// rgb(255,255,255)
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
+
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+
+// document
+//   .querySelector('.nav__link')
+//   .addEventListener('click', function (event) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('LINK', event.target, event.currentTarget);
+
+//     // we also can stop propogation, but usually it's not a good idea to stop the propogation explicitly
+//     // event.stopPropagation();
+//   });
+
+document.querySelector('.nav').addEventListener('click', function (event) {});
