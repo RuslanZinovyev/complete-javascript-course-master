@@ -72,6 +72,33 @@ document
     }
   });
 
+// Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (event) {
+  const clicked = event.target.closest('.operations__tab');
+  // Guard clause
+  if (!clicked) return;
+
+  // Remove active classes
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+  tabsContent.forEach(content =>
+    content.classList.remove('operations__content--active')
+  );
+
+  // Active tab
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  const selectedTab = document.querySelector(
+    `.operations__content--${clicked.dataset.tab}`
+  );
+
+  selectedTab.classList.add('operations__content--active');
+});
+
 ////////////////////////////////////////////////
 ///////////// Experimental code ///////////////
 ///////////////////////////////////////////////
@@ -152,4 +179,18 @@ console.log(url);
 //     // event.stopPropagation();
 //   });
 
-document.querySelector('.nav').addEventListener('click', function (event) {});
+// document.querySelector('.nav').addEventListener('click', function (event) {});
+
+// const h1 = document.querySelector('h1');
+
+// // Going downwards: child
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.children);
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
+
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// // Going sideways: siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
