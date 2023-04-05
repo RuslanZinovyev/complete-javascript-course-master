@@ -9,6 +9,10 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
 
 const openModal = function (event) {
   event.preventDefault;
@@ -73,10 +77,6 @@ document
   });
 
 // Tabbed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
 tabsContainer.addEventListener('click', function (event) {
   const clicked = event.target.closest('.operations__tab');
   // Guard clause
@@ -99,6 +99,25 @@ tabsContainer.addEventListener('click', function (event) {
   selectedTab.classList.add('operations__content--active');
 });
 
+// Menu fade animation
+const handleHover = function (event) {
+  if (event.target.classList.contains('nav__link')) {
+    const link = event.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(element => {
+      if (element !== link) {
+        element.style.opacity = this;
+      }
+    });
+    logo.style.opacity = this;
+  }
+};
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
 ////////////////////////////////////////////////
 ///////////// Experimental code ///////////////
 ///////////////////////////////////////////////
