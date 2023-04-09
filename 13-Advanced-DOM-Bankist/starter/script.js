@@ -161,6 +161,21 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 headerObserver.observe(header);
 
+const allSections = document.querySelectorAll('.section');
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+
+  entry.target.classList.remove('section--hidden');
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
 ////////////////////////////////////////////////
 ///////////// Experimental code ///////////////
 ///////////////////////////////////////////////
@@ -171,7 +186,7 @@ console.log(header);
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
-const allSections = document.querySelectorAll('section');
+// const allSections = document.querySelectorAll('section');
 console.log(allSections);
 const buttons = document.getElementsByTagName('button');
 console.log(buttons);
