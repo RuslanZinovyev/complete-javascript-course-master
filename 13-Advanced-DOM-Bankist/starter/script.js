@@ -228,6 +228,10 @@ btnLeft.addEventListener('click', () => {
   prevSlide();
 });
 
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') prevSlide();
+});
+
 ////////////////////////////////////////////////
 ///////////// Experimental code ///////////////
 ///////////////////////////////////////////////
