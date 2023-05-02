@@ -20,3 +20,7 @@ matilda.calcAge();
 jack.calcAge();
 
 console.log(jack instanceof Person);
+
+const arr = [1, 2, 3, 4, 5, 6];
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
