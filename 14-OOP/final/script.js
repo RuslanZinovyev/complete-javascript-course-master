@@ -99,8 +99,6 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 
 GOOD LUCK 😀
 */
-
-/*
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -108,23 +106,25 @@ const Car = function (make, speed) {
 
 Car.prototype.accelerate = function () {
   this.speed += 10;
-  console.log(`${this.make} is going at ${this.speed} km/h`);
+  console.log(this.speed);
 };
 
-Car.prototype.brake = function () {
+Car.prototype.break = function () {
   this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed} km/h`);
+  console.log(this.speed);
 };
 
-const bmw = new Car('BMW', 120);
-const mercedes = new Car('Mercedes', 95);
+const mercedes = new Car('Mercedes', 120);
+const bmw = new Car('BMW', 150);
+
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.break();
 
 bmw.accelerate();
-bmw.accelerate();
-bmw.brake();
-bmw.accelerate();
+bmw.break();
 
-
+/*
 ///////////////////////////////////////
 // ES6 Classes
 
