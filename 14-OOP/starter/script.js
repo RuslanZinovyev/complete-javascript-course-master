@@ -24,3 +24,28 @@ console.log(jack instanceof Person);
 const arr = [1, 2, 3, 4, 5, 6];
 console.log(arr.__proto__);
 console.log(arr.__proto__ === Array.prototype);
+
+// class expression
+// const PersonClass = class {}
+// class declaration
+class PersonClass {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2023 - this.birthYear);
+  }
+}
+
+const jessica = new PersonClass('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+PersonClass.prototype.greet = function () {
+  console.log(`Hello ${this.firstName}`);
+};
+
+jessica.greet();
