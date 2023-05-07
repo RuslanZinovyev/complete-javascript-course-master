@@ -38,6 +38,10 @@ class PersonClass {
   calcAge() {
     console.log(2023 - this.birthYear);
   }
+
+  get age() {
+    return 2023 - this.birthYear;
+  }
 }
 
 const jessica = new PersonClass('Jessica', 1996);
@@ -48,4 +52,4 @@ PersonClass.prototype.greet = function () {
   console.log(`Hello ${this.firstName}`);
 };
 
-jessica.greet();
+console.log(jessica.age);
